@@ -1,5 +1,6 @@
 from flask import Flask,request
 import requests
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ def extractor():
         datak.append(x.split("'")[1])
     finalkey = datak + data["tags"]
     allreviewer = requests.get("https://confman-api.onrender.com/reviewers/all")
-    allreviewer1 = allreviewer.json()
+    allreviewer1 = jsonify(allreviewer)
     allrev=allreviewer1["result"]
     reviewer = requests.post("http://ankitgaur2811.pythonanywhere.com/assignreviewer",data = {"allreviewer":allrev,"allpaperkeywords":finalkey,"assignedreview":[]})
     return reviewer
