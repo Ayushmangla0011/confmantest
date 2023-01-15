@@ -22,8 +22,9 @@ def extractor():
         datak.append(x.split("'")[1])
     finalkey = datak + data["tags"]
     allreviewer = requests.get("https://confman-api.onrender.com/reviewers/all")
-    allreviewer1 = jsonify(allreviewer)
-    allrev=allreviewer1["result"]
+    allreviewer1 = allreviewer.json()
+    allreviewer2 = jsonify(allreviewer1)
+    allrev=allreviewer2["result"]
     reviewer = requests.post("http://ankitgaur2811.pythonanywhere.com/assignreviewer",data = {"allreviewer":allrev,"allpaperkeywords":finalkey,"assignedreview":[]})
     return reviewer
 
