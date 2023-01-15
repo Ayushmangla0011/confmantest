@@ -1,5 +1,4 @@
 from flask import Flask,request
-import Reviwerass as Reass
 import requests
 
 app = Flask(__name__)
@@ -26,14 +25,6 @@ def extractor():
     reviewer = requests.post("http://ankitgaur2811.pythonanywhere.com/assignreviewer",data = {"allreviewer":allreviewer,"allpaperkeywords":finalkey,"assignedreview":[]})
     return reviewer
 
-@app.route("/assignreviewer",methods=["POST"])
-def assigner():
-    data = request.json
-    allreviewer = data["allreviewer"]
-    allpaperkeywords = data["allpaperkeywords"]
-    assignedreview = data["assignedreview"]
-    result = Reass.assgin(allreviewer,allpaperkeywords,assignedreview)
-    return {"result": result}
 
 if __name__ == "__main__":
     app.run(debug = False,host="0.0.0.0")
